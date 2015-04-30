@@ -64,6 +64,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
+
        Button newButton =  new Button(this){
            @Override
            public boolean onTouchEvent(MotionEvent event) {
