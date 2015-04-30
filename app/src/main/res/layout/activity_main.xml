@@ -7,6 +7,14 @@
         android:layout_width="wrap_content"
         android:id="@+id/next_activity"
         android:text="启动下一个"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/next_activity"
+        android:text="这个有点吊"
+        android:id="@+id/btn_diao"
+        />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="240dp"

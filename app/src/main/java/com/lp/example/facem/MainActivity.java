@@ -1,17 +1,18 @@
 package com.lp.example.facem;
 
 import android.content.ComponentName;
-import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.WebView;
-
-import com.lp.example.facem.remote.MyService;
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -43,7 +44,40 @@ public class MainActivity extends ActionBarActivity {
         mWebview = (WebView) findViewById(R.id.web_view);
         mWebview.getSettings().setJavaScriptEnabled(true);
         mWebview.loadUrl("http://www.baidu.com");
-        bindService(new Intent(this, MyService.class),mServiceConnection,BIND_AUTO_CREATE);
+//        bindService(new Intent(this, MyService.class),mServiceConnection,BIND_AUTO_CREATE);
+        Button button  = (Button) findViewById(R.id.btn_diao);
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.e("btn","onTouch excute on btn "+event.getAction());
+                return false;
+            }
+        });
+
+
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("btn", "onClick excute on btn");
+            }
+        });
+
+       Button newButton =  new Button(this){
+           @Override
+           public boolean onTouchEvent(MotionEvent event) {
+               int action = event.getAction();
+               switch (action){
+                   case MotionEvent.ACTION_DOWN:
+                       Log.e("tag","action down laizihan");
+                       break;
+
+               }
+               return super.onTouchEvent(event);
+           }
+       };
+
     }
 
 
