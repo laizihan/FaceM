@@ -6,5 +6,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings!</string>
     <string name="title_activity_photo_wall">PhotoWallActivity</string>
+    <string name="title_activity_zoom">ZoomActivity</string>
+    <string name="title_activity_volley_test">VolleyTestActivity</string>
 
 </resources>
