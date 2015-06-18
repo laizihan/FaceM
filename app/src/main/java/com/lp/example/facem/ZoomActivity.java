@@ -6,10 +6,14 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,12 +27,25 @@ import android.widget.ImageView;
 
 public class ZoomActivity extends ActionBarActivity {
     public static Boolean opened = false;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private Toolbar toorbar;
+    private DrawerLayout drawerLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zoom);
+        toorbar = (Toolbar) findViewById(R.id.zoom_toolbar);
+        setSupportActionBar(toorbar);
         Button selectImage = (Button) findViewById(R.id.select_image);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this ,drawerLayout,toorbar, R.string.open, R.string.close);
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+
+
         final ViewGroup container = (ViewGroup) findViewById(R.id.ll_origin_image);
         final ImageButton thumbtn = (ImageButton) findViewById(R.id.thumb_Button);
         thumbtn.setOnClickListener(new View.OnClickListener() {
@@ -65,14 +82,27 @@ public class ZoomActivity extends ActionBarActivity {
         volleyTestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ZoomActivity.this,VolleyTestActivity.class));
+                startActivity(new Intent(ZoomActivity.this, VolleyTestActivity.class));
             }
         });
         container.addView(volleyTestButton);
 
 
+
+
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
 
     private void zoomImageFromThumb(final View thumview, int res) {
         final ImageView expandedView = (ImageView) findViewById(R.id.expanded_image);
@@ -149,7 +179,6 @@ public class ZoomActivity extends ActionBarActivity {
                 return true;
             }
         });
-
 
 
     }

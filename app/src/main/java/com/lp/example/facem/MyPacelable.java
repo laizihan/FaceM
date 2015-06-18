@@ -3,8 +3,6 @@ package com.lp.example.facem;
 import android.os.AsyncTask;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.view.Window;
-import android.view.WindowManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,9 +15,7 @@ public class MyPacelable implements Parcelable {
     public String husband;
     public String wife;
     public Integer[] a;
-    private Window window;
-    private WindowManager windowManager;
-    
+
 
 
 
@@ -32,9 +28,10 @@ public class MyPacelable implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString("laizihan");
         dest.writeString("llp");
-    }
 
-    public void setThread() {
+    }
+    @Deprecated
+    public void  setThread() {
         final ExecutorService executorService = Executors.newCachedThreadPool();
         AsyncTask asyncTask;
         executorService.execute(new Runnable() {

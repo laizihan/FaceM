@@ -2,6 +2,7 @@ package com.lp.example.facem;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -74,9 +75,16 @@ public class VolleyTestActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            pareInt("3");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public int pareInt(@NonNull String numString){
+        return Integer.parseInt(numString);
     }
 }

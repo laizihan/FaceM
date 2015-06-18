@@ -8,5 +8,8 @@
     <string name="title_activity_photo_wall">PhotoWallActivity</string>
     <string name="title_activity_zoom">ZoomActivity</string>
     <string name="title_activity_volley_test">VolleyTestActivity</string>
+    <string name="open">芝麻开门</string>
+    <string name="close">关你麻痹</string>
+    <string name="title_activity_transition">TransitionActivity</string>
 
 </resources>

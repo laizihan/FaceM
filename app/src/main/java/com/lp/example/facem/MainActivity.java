@@ -4,14 +4,13 @@ import android.animation.Animator;
 import android.animation.FloatEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.ContentProvider;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -31,11 +30,6 @@ import com.lp.example.facem.remote.MyService;
 
 public class MainActivity extends AppCompatActivity {
 
-    private IMyService myService;
-    private WebView mWebview;
-    private ViewGroup viewGroup;
-    private ContentProvider contentProvider;
-    private BroadcastReceiver receiver;
 
 
     public ObjectAnimator animator;
@@ -43,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            myService = IMyService.Stub.asInterface(service);
+            IMyService myService = IMyService.Stub.asInterface(service);
             try {
                 System.out.println(myService.plus(2, 5));
             } catch (RemoteException e) {
@@ -57,15 +51,13 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private Button next_btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mWebview = (WebView) findViewById(R.id.web_view);
+        WebView mWebview = (WebView) findViewById(R.id.web_view);
         mWebview.getSettings().setJavaScriptEnabled(true);
-        next_btn = (Button) findViewById(R.id.next_activity);
+        Button next_btn = (Button) findViewById(R.id.next_activity);
         mWebview.loadUrl("http://www.baidu.com");
         bindService(new Intent(this, MyService.class),mServiceConnection,BIND_AUTO_CREATE);bindService(new Intent(this, MyService.class),mServiceConnection,BIND_AUTO_CREATE);
         final AppCompatButton button = (AppCompatButton) findViewById(R.id.btn_diao);
@@ -96,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                animator.cancel();
-                startActivity(new Intent(MainActivity.this,ZoomActivity.class));
+                startActivity(new Intent(MainActivity.this, ZoomActivity.class));
             }
         });
 
@@ -116,11 +108,17 @@ public class MainActivity extends AppCompatActivity {
         Button newButton = new Button(this) {
 
             @Override
-            public boolean onTouchEvent(MotionEvent event) {
-                int action = event.getAction();
+            public boolean onTouchEvent(@NonNull MotionEvent event) {
+//                int action = event.getAction();
+                int action = event.getActionMasked();
+
+
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                         Log.e("tag", "action down laizihan");
+                        return true;
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        Log.e("tag", "action 2 fingers down laizihan");
                         return true;
                     case MotionEvent.ACTION_MOVE:
                         Log.e("tag", "action move laizihan");
@@ -129,12 +127,16 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("tag", "action up laizhan");
                         break;
 
+                    case MotionEvent.ACTION_POINTER_UP:
+                        Log.e("tag", "action up laizhan");
+                        break;
+
                 }
 
                 return super.onTouchEvent(event);
             }
         };
-        newButton.setText("新按钮");
+        newButton.setText("新按钮新按钮新按钮新按钮");
         newButton.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         view.addView(newButton);
 
@@ -169,6 +171,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 
