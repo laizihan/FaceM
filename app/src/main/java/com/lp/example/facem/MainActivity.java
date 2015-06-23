@@ -130,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_POINTER_UP:
                         Log.e("tag", "action up laizhan");
                         break;
+                    default:
+                        Log.e("tag","action default");
+                        break;
 
                 }
 
@@ -196,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
         public void onAnimationRepeat(Animator animation) {
             Log.e("anim", "anim repeat");
 
+
         }
     };
 
@@ -204,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
