@@ -1,6 +1,7 @@
 package com.lp.example.facem.custom_view;
 
 import android.animation.ValueAnimator;
+import android.app.IntentService;
 import android.content.Context;
 import android.support.v4.app.TaskStackBuilder;
 import android.view.SurfaceView;
@@ -16,5 +17,6 @@ public class TestSurface extends SurfaceView {
     ValueAnimator animator;
     Number number;
     TaskStackBuilder taskStackBuilder;
+    IntentService intentService;
 
 }
